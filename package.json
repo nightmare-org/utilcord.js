@@ -15,8 +15,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nightmare-org/utilcord.js.git"
-    
+    "url": "git+https://github.com/nightmare-org/utilcord.js.git",
+    "docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "bugs": {
     "url": "https://github.com/nightmare-org/utilcord.js/issues"
