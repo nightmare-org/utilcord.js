@@ -1,0 +1,41 @@
+{
+  "name": "utilcord.js",
+  "version": "1.0.1",
+  "description": "An Advanced Package Manager for discord.js",
+  "main": "./src/index.js",
+  "types": "./typings/index.d.ts",
+  "files": [
+    "src/",
+    "assets/",
+    "typings/"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nightmare-org/utilcord.js.git"
+    
+  },
+  "bugs": {
+    "url": "https://github.com/nightmare-org/utilcord.js/issues"
+  },
+  "homepage": "https://github.com/nightmare-org/utilcord.js#readme",
+  "keywords": [
+    "discord.js",
+    "pagination",
+    "discord",
+    "discord-pagination",
+    "markdown",
+    "captcha"
+  ],
+  "author": "RamaWasLoved",
+  "license": "MIT",
+  "dependencies": {
+    "canvas": "^2.10.1",
+    "discord.js": "^14.5.0",
+    "undici": "^5.10.0"
+  }
+  
+}
