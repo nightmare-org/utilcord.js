@@ -65,7 +65,7 @@ class Markdown {
      * @param {Boolean} newLine Add new line ?
      * @returns {String} Return string (not format)
      * @example
-     * const { Markdown } = require('coders.js');
+     * const { Markdown } = require('utilcord.js');
      * const markdown = new Markdown();
      * markdown.format('Hello World', 'BOLD', 'RED', 'DARKBLUE', true);
      */
@@ -83,7 +83,7 @@ class Markdown {
      *
      * @returns {String} Return formatted string
      * @example
-     * const { Markdown } = require('coders.js');
+     * const { Markdown } = require('utilcord.js');
      * const markdown = new Markdown();
      * const text = markdown.format('Hello World', 'BOLD', 'RED', 'DARKBLUE', true).toCodeblock();
      * message.channel.send(text);
