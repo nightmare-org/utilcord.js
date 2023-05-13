@@ -2,7 +2,6 @@ const { EventEmitter } = require('events');
 const colors = require("colors");
 
 class AntiCrash extends EventEmitter {
-    antiCrash_Emit = this
     constructor(client, options) {
         super();
         this.client = client
@@ -37,13 +36,9 @@ class AntiCrash extends EventEmitter {
                 console.log(`> [utilcord-anticrash]: Uncaught Exception/Catch (Monitor)`.red);
                 console.log(err, origin);
             })
-            process.on("multipleResolves", (type, promise, reason) => {
-                console.log(`> [utilcord-anticrash]: Multiple Resloves`.red);
-                console.log(type, promise, reason);
-            })
         }
 
     }
 }
 
-module.exports = { AntiCrash };
+module.exports = AntiCrash;
