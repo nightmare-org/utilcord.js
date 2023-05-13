@@ -1,4 +1,7 @@
 "use strict";
+const crypto = require("crypto");
+const dns = require("dns");
+
 /**
  * @constructs chunk
  * @function
@@ -157,31 +160,204 @@ function calculateDateDifference(start, end) {
  * //
  */
 
-// Convert a date to a different time zone
-function convertTimeZone(date, timeZone) {
-    const options = {
-      timeZone,
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    };
-    const formatter = new Intl.DateTimeFormat('en-US', options);
-    const formattedString = formatter.format(date);
-    return new Date(formattedString);
+/**
+ * @constructs calculate
+ * @function
+ * @example
+ * const result = calculate('add', 5, 3);
+ * console.log('Result:', result); // Output: Result: 8
+ * //
+ */
+function calculate(operation, num1, num2) {
+  switch (operation) {
+    case 'add':
+      return num1 + num2;
+    case 'subtract':
+      return num1 - num2;
+    case 'multiply':
+      return num1 * num2;
+    case 'divide':
+      return num1 / num2;
+    default:
+      return NaN;
+  }
+}
+
+/**
+ * @constructs generateRandomNumber
+ * @function
+ * @example
+ * const randomNumber = generateRandomNumber(1, 10);
+ * console.log('Random Number:', randomNumber); (random number between 1 and 10)
+ * //
+ */
+
+// Generate a random number between min and max (inclusive)
+function generateRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+/**
+ * @constructs roundNumber
+ * @function
+ * @example
+ *  const roundedNumber = roundNumber(3.14159, 2);
+ *  console.log('Rounded Number:', roundedNumber);: Rounded Number: 3.14
+ */
+
+function roundNumber(number, decimalPlaces) {
+    return Number(number.toFixed(decimalPlaces));
+}
+/**
+ * @constructs convertNumberFormat
+ * @function
+ * @example
+ * const binaryNumber = convertNumberFormat(10, 'binary');
+ * console.log('Binary Number:', binaryNumber); // Output: Binary Number: 1010
+ * 
+ * const hexadecimalNumber = convertNumberFormat(255, 'hexadecimal');
+ * console.log('Hexadecimal Number:', hexadecimalNumber); // Output: Hexadecimal Number: ff
+ */
+  // Convert a number to a different format (binary, octal, hexadecimal)
+  function convertNumberFormat(number, format) {
+    switch (format) {
+      case 'binary':
+        return number.toString(2);
+      case 'octal':
+        return number.toString(8);
+      case 'hexadecimal':
+        return number.toString(16);
+      default:
+        return '';
+    }
   }
 
+// Encryption functions
 
+/**
+ * @constructs encryptedMessage
+ * @function
+ * @example
+ * const encryptionKey = 'a1b2c3d4e5f6g7h8'; // Replace with your own encryption key
+ * const message = 'Hello, World!';
+ * const encryptedMessage = encryptMessage(encryptionKey, message);
+ * console.log('Encrypted Message:', encryptedMessage);
+ * //
+ */
+
+function encryptMessage(key, message) {
+    const cipher = crypto.createCipher('aes-256-cbc', key);
+    let encryptedMessage = cipher.update(message, 'utf8', 'hex');
+    encryptedMessage += cipher.final('hex');
+    return encryptedMessage;
+}
+
+/**
+ * @constructs decryptMessage
+ * @function
+ * @example
+ * const decryptedMessage = decryptMessage(encryptionKey, encryptedMessage);
+ * console.log('Decrypted Message:', decryptedMessage);
+ * //
+ */
+
+function decryptMessage(key, encryptedMessage) {
+    const decipher = crypto.createDecipher('aes-256-cbc', key);
+    let decryptedMessage = decipher.update(encryptedMessage, 'hex', 'utf8');
+    decryptedMessage += decipher.final('utf8');
+    return decryptedMessage;
+}
+
+// Hashing functions
+
+/**
+ * @constructs hashPassword
+ * @function 
+ * @example
+ * const password = 'myPassword';
+ * const hashedPassword = hashPassword(password);
+ * console.log('Hashed Password:', hashedPassword);
+ * //
+ */
+
+function hashPassword(password) {
+    const hashedPassword = crypto
+      .createHash('sha256')
+      .update(password)
+      .digest('hex');
+    return hashedPassword;
+}
+
+/**
+ * @constructs isEmailValid
+ * @function
+ * @example
+ * const email = 'test@example.com';
+ * isEmailValid(email).then((isValid) => {
+ * console.log('Is Email Valid?', isValid);
+ * });
+ * //
+ */
+
+function isEmailValid(email) {
+  
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  if (!emailRegex.test(email)) {
+    return false;
+  }
+  const parts = email.split('@');
+  const domain = parts[1];
+
+  return new Promise((resolve) => {
+    dns.resolveMx(domain, (error, addresses) => {
+      if (error || !addresses || addresses.length === 0) {
+        resolve(false);
+      } else {
+        resolve(true);
+      }
+    });
+  });
+}
+
+/**
+ * @constructs isDomainValid
+ * @function
+ * @example
+ * const domain = 'example.com';
+ * isDomainValid(domain).then((isValid) => {
+  console.log('Is Domain Valid?', isValid);
+ * });
+ * //
+ */
+
+  function isDomainValid(domain) {
+    return new Promise((resolve) => {
+      dns.lookup(domain, (error) => {
+        if (error) {
+          resolve(false);
+        } else {
+          resolve(true);
+        }
+      });
+    });
+  }
 
 module.exports = {
     chunk,
     StringToMs,
     ms,
     shuffleArray,
-    convertTimeZone,
     calculateDateDifference,
     parseDate,
-    formatDate
+    formatDate,
+    calculate,
+    generateRandomNumber,
+    roundNumber,
+    convertNumberFormat,
+    encryptMessage,
+    decryptMessage,
+    hashPassword,
+    isEmailValid,
+    isDomainValid
 }
