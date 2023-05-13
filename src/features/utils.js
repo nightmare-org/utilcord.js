@@ -84,7 +84,7 @@ function ms(ms) {
  * @param {Number} time 
  * @returns {String}
  * @example
- * const { shuffleArray } = require('coders.js');
+ * const { shuffleArray } = require('utilcord.js');
  * console.log(shuffleArray([1, 2, 3, 4, 5]));
  * // Output: [ 2, 5, 1, 4, 3 ]
  */
