@@ -22,6 +22,7 @@ module.exports = {
     Paginate: require('./features/paginate.js'),
     Markdown: require('./features/markdown.js'),
     Captcha: require('./features/captcha.js'),
+    AntiCrash: require('./features/anti-crash),
     DiscordTogether: require('./features/discordtogether.js'),
     chunk,
     ms,
