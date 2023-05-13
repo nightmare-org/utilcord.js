@@ -43,7 +43,7 @@ class DiscordTogether {
      *      GatewayIntentBits.GuildMessages,
      *     ],
      * });
-     * const { DiscordTogether } = require('utlcord.js');
+     * const { DiscordTogether } = require('utilcord.js');
      *
      * client.discordTogether = new DiscordTogether(client);
      *
